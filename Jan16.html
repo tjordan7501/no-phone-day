@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>No-Phone Day</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0f0f0f;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 700px;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .date {
+      font-size: 1.4rem;
+      opacity: 0.85;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      max-width: 260px;
+      margin: 20px auto 30px auto;
+      display: block;
+    }
+
+    .countdown {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ffcc00;
+      margin: 30px 0;
+    }
+
+    .warning {
+      font-size: 1rem;
+      opacity: 0.8;
+      margin-top: 15px;
+    }
+
+    .tagline {
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .play-button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #ffcc00;
+      color: #000;
+    }
+
+    .play-button:hover {
+      background: #ffd633;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>NO-PHONE DAY</h1>
+    <div class="date">January 16th</div>
+
+    <!-- Logo image -->
+    <img src="logo.png" alt="No-Phone Day Logo" class="logo">
+
+    <div id="countdown" class="countdown"></div>
+
+    <div class="warning">
+      Warning: Phones may be confiscated by children.
+    </div>
+
+    <div class="tagline">
+      Phones Down.  Tickles Up!
+    </div>
+
+    <!-- Music -->
+    <button class="play-button" onclick="playSong()">
+      ▶ Play “No Phone” by Cake
+    </button>
+
+    <audio id="song">
+      <!-- You must supply this MP3 yourself -->
+      <source src="no-phone.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <script>
+    const targetDate = new Date("January 16, 2026 00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "It’s No-Phone Day!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        days + " days " +
+        hours + " hours " +
+        minutes + " minutes " +
+        seconds + " seconds";
+    }
+
+    function playSong() {
+      document.getElementById("song").play();
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
